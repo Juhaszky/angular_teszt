@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './models/user';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular_teszt';
+
 }

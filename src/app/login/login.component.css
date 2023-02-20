@@ -2,11 +2,19 @@ body {
     background-color: black;
 }
 form {
-    padding: 10rem;
+    padding: 5rem;
     border: 0.3em solid blueviolet;
     border-radius: 2em;
     background-color: whitesmoke;
 }
 button {
     background-color: rgb(180, 139, 218);
+}
+#registrateSection {
+    margin-top: 1rem;
+    
+}
+#registrateSection a {
+    text-decoration: none;
+    cursor: pointer;
 }
