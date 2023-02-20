@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CryptoService } from '../services/crypto.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  constructor(private cryptoService: CryptoService) {}
   cryptos = [];
+
+  ngOnInit() {
+    this.cryptos = this.cryptoService.getCryptos();
+  }
 }
