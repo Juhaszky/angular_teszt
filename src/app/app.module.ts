@@ -15,11 +15,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NewCryptoComponent } from './new-crypto/new-crypto.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
+import { CryptoService } from './services/crypto.service';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard]}
 ]
 
 @NgModule({
@@ -27,6 +33,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    NewCryptoComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +49,11 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatButtonModule,
     RouterModule.forRoot(routes),
+    MatDialogModule,
+    MatSelectModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CryptoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

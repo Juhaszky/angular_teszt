@@ -12,6 +12,12 @@ export class LocalStorageService {
   getUser() {
     return localStorage.getItem('users');
   }
+  getCurrentUser() {
+    return localStorage.getItem('currentUser');
+  }
+  modifyCurrentUser(user: object) {
+    return localStorage.setItem('currentUser', JSON.stringify(user));
+  }
   setUser(key: string, userValue: any) {
     let registeredUsers = this.getUser();
     let userTemplate = new User(userValue.email,userValue.password, []);
