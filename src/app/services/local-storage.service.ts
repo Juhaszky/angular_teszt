@@ -5,7 +5,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class LocalStorageService {
-
+  
 
   constructor() { }
 
@@ -34,4 +34,21 @@ export class LocalStorageService {
   setLogin() {
     localStorage.setItem('loggedIn',JSON.stringify(true));
   }
+  saveUserData() {
+    const users = this.getUser();
+    const currentUser = this.getCurrentUser();
+    if(users) {
+      JSON.parse(users).map( (user: User) => {
+        if(currentUser) {
+          if(user.email == JSON.parse(currentUser).email) {
+            user = JSON.parse(currentUser);    
+            console.log('egyezik');
+            console.log(users);
+          }
+        }
+      });      
+    }
+    return users;
+  }
+
 }

@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CryptoService } from '../services/crypto.service';
 import { LocalStorageService } from '../services/local-storage.service';
 
@@ -14,7 +15,8 @@ export class NewCryptoComponent {
   cryptoList: any = [];
   selectedCrypto = "";
   
-  constructor(private cryptoService: CryptoService, private localStorage: LocalStorageService) {}
+  constructor(private cryptoService: CryptoService, private localStorage: LocalStorageService, @Inject(MAT_DIALOG_DATA) public data: string,
+  private dialogRef: MatDialogRef<NewCryptoComponent>) {}
 
   getCryptoList() {
     this.cryptoService.getApiCryptos().subscribe((data) => {
@@ -27,12 +29,11 @@ export class NewCryptoComponent {
   ngOnInit() {
     this.getCryptoList();
   }
-  ngOnChanges() {
-    console.log('alma');
-  }
 
-
-  addCryptoToUser() {
-    this.cryptoService.setUserCrypto(this.selectedCrypto);
+  saveSelectedCrypto() {
+    if (this.selectedCrypto !== "") {
+      this.dialogRef.close({data: this.selectedCrypto});
+      //this.localStorage.saveUserData();
+    }
   }
 }

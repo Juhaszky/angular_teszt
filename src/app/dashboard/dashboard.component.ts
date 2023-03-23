@@ -1,6 +1,6 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { CryptoService } from '../services/crypto.service';
-import { MatDialog } from '@angular/material/dialog'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { NewCryptoComponent } from '../new-crypto/new-crypto.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { NewCryptoComponent } from '../new-crypto/new-crypto.component';
 })
 export class DashboardComponent {
   constructor(private cryptoService: CryptoService, private dialog: MatDialog) {}
-  @Output() cryptos = [];
+  @Input() cryptos: string[] = [];
 
   ngOnInit() {
     this.cryptos = this.cryptoService.getUserCryptos();
@@ -21,9 +21,21 @@ export class DashboardComponent {
   }
 
   openDialog() {
-    this.dialog.open(NewCryptoComponent, {
+    let dialogRef =this.dialog.open(NewCryptoComponent, {
       height: '25%',
       width: '25%' 
     });
+    dialogRef.afterClosed().subscribe( res => {
+      if (res !== undefined) {
+        const selectedCrypto = res?.data || "";
+        if (this.cryptos.find((crypto) => crypto === selectedCrypto) === undefined) {
+          this.cryptos.push(selectedCrypto)
+          this.cryptoService.setUserCrypto(selectedCrypto);
+        } else {
+          return alert("Selected crypto already exist!");
+        }
+      }
+    })
   }
+
 }
