@@ -21,12 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { CryptoService } from './services/crypto.service';
 import { AuthGuard } from './guards/auth.guard';
-
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard]}
-]
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -34,6 +30,7 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     NewCryptoComponent,
+    LineChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,10 +45,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    RouterModule.forRoot(routes),
     MatDialogModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule
   ],
   providers: [CryptoService],
   bootstrap: [AppComponent]
