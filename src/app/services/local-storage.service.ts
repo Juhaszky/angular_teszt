@@ -5,24 +5,23 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  
-
+  userId = 0;
   constructor() { }
 
-  getUser() {
-    return localStorage.getItem('users');
+  getUsers() {
+    return JSON.parse(localStorage.getItem('users') ?? 'null');
   }
-  getCurrentUser() {
-    return localStorage.getItem('currentUser');
-  }
+
   modifyCurrentUser(user: object) {
     return localStorage.setItem('currentUser', JSON.stringify(user));
   }
   setUser(key: string, userValue: any) {
-    let registeredUsers = this.getUser();
-    let userTemplate = new User(userValue.email,userValue.password, []);
-    if(registeredUsers) {
-      let users = JSON.parse(registeredUsers);
+    this.userId++;
+    this.userId = this.userId++;
+    const registeredUsers = this.getUsers();
+    let userTemplate = new User(userValue.email,userValue.password, [], this.userId);
+    if(registeredUsers !== null) {
+      let users = registeredUsers;
       users.push(userTemplate);
       return localStorage.setItem(key, JSON.stringify(users));
     }
@@ -31,24 +30,8 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(tempArr));
   }
 
-  setLogin() {
-    localStorage.setItem('loggedIn',JSON.stringify(true));
-  }
-  saveUserData() {
-    const users = this.getUser();
-    const currentUser = this.getCurrentUser();
-    if(users) {
-      JSON.parse(users).map( (user: User) => {
-        if(currentUser) {
-          if(user.email == JSON.parse(currentUser).email) {
-            user = JSON.parse(currentUser);    
-            console.log('egyezik');
-            console.log(users);
-          }
-        }
-      });      
-    }
-    return users;
+  getLoggedInUserId(): number |undefined {
+    return JSON.parse(localStorage.getItem('userId') ?? 'null');
   }
 
 }
