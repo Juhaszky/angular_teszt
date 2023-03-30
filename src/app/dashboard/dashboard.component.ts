@@ -1,8 +1,8 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { CryptoService } from '../services/crypto.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { NewCryptoComponent } from '../new-crypto/new-crypto.component';
-
+import { Crypto } from '../models/crypto';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,12 +11,11 @@ import { NewCryptoComponent } from '../new-crypto/new-crypto.component';
 export class DashboardComponent {
   constructor(private cryptoService: CryptoService, private dialog: MatDialog) {}
   @Input() cryptos: string[] = [];
+  selectedIndex = 0;
+  selectedCryptoDetails: Crypto | undefined;
+
 
   ngOnInit() {
-    this.cryptos = this.cryptoService.getUserCryptos();
-  }
-
-  ngOnChanges() {
     this.cryptos = this.cryptoService.getUserCryptos();
   }
 
@@ -28,14 +27,16 @@ export class DashboardComponent {
     dialogRef.afterClosed().subscribe( res => {
       if (res !== undefined) {
         const selectedCrypto = res?.data || "";
-        if (this.cryptos.find((crypto) => crypto === selectedCrypto) === undefined) {
-          this.cryptos.push(selectedCrypto)
-          this.cryptoService.setUserCrypto(selectedCrypto);
-        } else {
-          return alert("Selected crypto already exist!");
-        }
+        this.cryptoService.setUserCrypto(selectedCrypto);
       }
     })
+  }
+  
+  findCryptoByName() {
+    const cryptos = this.cryptoService.getApiCryptos();
+      cryptos.forEach((x) => {
+        this.selectedCryptoDetails = Object.values(x).find((data:Crypto) => data.asset_id === this.cryptoService.getUserCryptos()[this.selectedIndex]);
+      });
   }
 
 }

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {

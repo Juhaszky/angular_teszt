@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill" class="d-flex justify-content-center">
     <mat-label>Crypto..</mat-label>
     <mat-select [(value)]="selectedCrypto">
-        <mat-option *ngFor="let crypto of cryptoList" value="{{ crypto.name }}">{{ crypto.name }}</mat-option>
+        <mat-option *ngFor="let crypto of cryptoList" value="{{ crypto.asset_id }}">{{ crypto.name }}</mat-option>
     </mat-select>
 </mat-form-field>
 <button mat-button color="primary" (click)="saveSelectedCrypto()">Add</button>

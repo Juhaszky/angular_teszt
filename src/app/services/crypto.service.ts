@@ -23,35 +23,11 @@ export class CryptoService {
   }
 
   setUserCrypto(selectedCrypto: string) {
-    console.log(this.users);
-    console.log(this.currentId);
-    if(this.users && this.currentId !== 0) {
-      const userIndex = this.users.findIndex((user:User) => user.id === this.currentId);
-      const user = this.users.find((user:User) => user.id === this.currentId);
-      console.log(user);
-      console.log(selectedCrypto);
-      console.log(user?.cryptos);
-      if(user?.cryptos.find((userCrypto: string) => userCrypto === selectedCrypto) === undefined) {
-        console.log("ide bemegyunk?")
-        if(user) user.cryptos.push(selectedCrypto);
-        console.log(user) 
-        if(userIndex !== -1) {
-          this.users.splice(userIndex, 1, {...this.users[userIndex], ...user});
-        }
-        console.log("Ezt rakja bele:");
-        console.log(this.users);
-        return localStorage.setItem('users', JSON.stringify(this.users));
-        //return this.users;
-      } 
+    const user = this.users?.find(u => u.id === this.currentId);
+    if (user && !user.cryptos.includes(selectedCrypto)) {
+      user.cryptos.push(selectedCrypto);
+      localStorage.setItem('users', JSON.stringify(this.users));
     }
-    return undefined;
-    /*
-    const user = this.users
-    if(this.currentUser) {
-      let tempCurrentUser = JSON.parse(this.currentUser);
-        tempCurrentUser.cryptos.push(selectedCrypto);
-        return localStorage.setItem('currentUser', JSON.stringify(tempCurrentUser));
-    }*/
   }
 
   getApiCryptos() {
