@@ -9,41 +9,37 @@ import { LocalStorageService } from './local-storage.service';
 export class AuthService {
 
   constructor(private localStorageService: LocalStorageService, private router: Router) { }
+
   
 
-
   checkCredentials(userCred: {email: string, password: string}) {
-    let registeredUsers = this.localStorageService.getUser();
-    
-    if(registeredUsers) {
-      let users = JSON.parse(registeredUsers);
-      let user = users.filter((userData:User) => userData.email == userCred.email)
-      .map((data: any) => {
-        if(data.password == userCred.password) {
-          this.localStorageService.setLogin();
-          localStorage.setItem('currentUser',JSON.stringify(data));
-          this.router.navigateByUrl('dashboard');
+    const registeredUsers = this.localStorageService.getUsers();
+    console.log(registeredUsers);
+    console.log("registeredusers:");
+    if(registeredUsers !== null) {
+      const user = registeredUsers.find((userData:User) => userData.email === userCred.email);
+      if(user) { 
+        if(user.password === userCred.password) {
+          localStorage.setItem('userId', JSON.stringify(user.id));
+          return this.router.navigateByUrl('dashboard');
         } else {
-          alert('Hibás jelszó!');
-        }
-      });
-      if(user.length == 0) {
-        alert('Sikeresen regisztráltál!');
+          return alert('Hibás jelszó!');
+        } 
+      } else {
         this.signUp(userCred);
+        alert('Sikeresen regisztráltál!');
       }
     } else {
       this.signUp(userCred);
       alert('Sikeresen regisztráltál!');
     }
-    }
-  
-
+  }
 
   signUp(userData: object) {
-    this.localStorageService.setUser('users',userData)
+    this.localStorageService.setUser('users',userData);
   }
 
   isLoggedIn() {
-    return localStorage.getItem('loggedIn')!=null?true:false;
+    return localStorage.getItem('userId') !== null;
   }
 }
