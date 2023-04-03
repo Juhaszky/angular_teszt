@@ -13,8 +13,12 @@
         </ng-template>
     </mat-tab>
 </mat-tab-group>
-<div class="container">
+<div *ngIf="selectedCryptoDetails" 
+class="container">
     <app-line-chart 
     [cryptoInfo] = "selectedCryptoDetails"
-    *ngIf="selectedCryptoDetails"></app-line-chart>
+    ></app-line-chart>
+<app-exchange
+[cryptoData] = "selectedCryptoDetails"
+></app-exchange>
 </div>

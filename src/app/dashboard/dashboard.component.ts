@@ -20,18 +20,16 @@ export class DashboardComponent {
   }
 
   openDialog() {
-    let dialogRef =this.dialog.open(NewCryptoComponent, {
+    this.dialog.open(NewCryptoComponent, {
       height: '25%',
-      width: '25%' 
-    });
-    dialogRef.afterClosed().subscribe( res => {
-      if (res !== undefined) {
-        const selectedCrypto = res?.data || "";
-        this.cryptoService.setUserCrypto(selectedCrypto);
+      width: '25%'
+    }).afterClosed().subscribe(res => {
+      if (res?.data) {
+        this.cryptoService.setUserCrypto(res.data);
       }
-    })
+    });
   }
-  
+
   findCryptoByName() {
     const cryptos = this.cryptoService.getApiCryptos();
       cryptos.forEach((x) => {

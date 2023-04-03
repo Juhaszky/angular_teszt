@@ -1,0 +1,16 @@
+<div class="exchangeContainer" [formGroup]="exchangeForm">
+    <h2>Exchanger</h2>
+    <span id="usdSymbol">$ </span><input 
+    formControlName="inputFieldUSD" 
+    type="number"
+    [(ngModel)] = "dollarAmount" 
+    ngDefaultControl
+    (ngModelChange)="convertUsdToCrypto();">
+    
+    <span id="usdSymbol">{{ cryptoData?.name}}: </span><input 
+    formControlName="inputFieldCrypto" 
+    type="number"
+    [(ngModel)] = "cryptoAmount" 
+    ngDefaultControl
+    (ngModelChange)="convertCryptoToUsd();">
+</div>

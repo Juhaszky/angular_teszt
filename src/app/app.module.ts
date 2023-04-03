@@ -23,6 +23,7 @@ import { CryptoService } from './services/crypto.service';
 import { AuthGuard } from './guards/auth.guard';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ExchangeComponent } from './exchange/exchange.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DashboardComponent,
     NewCryptoComponent,
     LineChartComponent,
+    ExchangeComponent,
   ],
   imports: [
     BrowserModule,

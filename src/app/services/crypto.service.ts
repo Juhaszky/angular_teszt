@@ -43,6 +43,13 @@ export class CryptoService {
   getExchangeRatesPeriodly(requestCrypto: string) {
     let headers = new HttpHeaders().set('X-CoinAPI-Key', this.apiKey);
     let params = new HttpParams().append('history', 'period_id=7DAY');
-    return this.http.get(this.baseApiUrl + '/exchangerate', { headers: headers, params: params});
+    return this.http.get(this.baseApiUrl + 'exchangerate', { headers: headers, params: params});
   }
+  
+  getUsdExchangeRate(inputCrypto: string) {
+    /*let headers = new HttpHeaders().set('X-CoinAPI-Key', this.apiKey);
+    return this.http.get(this.baseApiUrl + 'exchangerate/'+ "USD/" + inputCrypto, { headers: headers });*/
+    return this.http.get('/assets/crypto_exchange_doge.json');
+  }
+  
 }
