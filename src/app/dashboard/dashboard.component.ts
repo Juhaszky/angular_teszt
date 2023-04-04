@@ -1,4 +1,4 @@
-import { Component, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CryptoService } from '../services/crypto.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { NewCryptoComponent } from '../new-crypto/new-crypto.component';
@@ -35,6 +35,11 @@ export class DashboardComponent {
       cryptos.forEach((x) => {
         this.selectedCryptoDetails = Object.values(x).find((data:Crypto) => data.asset_id === this.cryptoService.getUserCryptos()[this.selectedIndex]);
       });
+  }
+
+  deleteCrypto() {
+    this.cryptoService.removeUserCrypto(this.cryptos[this.selectedIndex]);
+    this.selectedCryptoDetails = undefined;
   }
 
 }

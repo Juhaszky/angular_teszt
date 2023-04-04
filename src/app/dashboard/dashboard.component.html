@@ -18,7 +18,10 @@ class="container">
     <app-line-chart 
     [cryptoInfo] = "selectedCryptoDetails"
     ></app-line-chart>
+    <hr>
 <app-exchange
 [cryptoData] = "selectedCryptoDetails"
 ></app-exchange>
+
+<button mat-raised-button color="warn" (click)="deleteCrypto();">DeleteCrypto</button>
 </div>
