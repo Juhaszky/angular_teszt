@@ -18,12 +18,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewCryptoComponent } from './new-crypto/new-crypto.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CryptoService } from './services/crypto.service';
 import { AuthGuard } from './guards/auth.guard';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ExchangeComponent } from './exchange/exchange.component';
+import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,11 @@ import { ExchangeComponent } from './exchange/exchange.component';
     HttpClientModule,
     NgxChartsModule
   ],
-  providers: [CryptoService],
+  providers: [CryptoService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorInterceptor,
+    multi: true
+   }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
