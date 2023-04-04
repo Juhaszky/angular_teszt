@@ -5,7 +5,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  userId = 0;
+  protected userId = 0;
   constructor() { }
 
   getUsers() {
@@ -16,9 +16,8 @@ export class LocalStorageService {
     return localStorage.setItem('currentUser', JSON.stringify(user));
   }
   setUser(key: string, userValue: any) {
-    this.userId++;
-    this.userId = this.userId++;
     const registeredUsers = this.getUsers();
+    this.userId = this.userId = registeredUsers ? registeredUsers.length : 0;
     let userTemplate = new User(userValue.email,userValue.password, [], this.userId);
     if(registeredUsers !== null) {
       let users = registeredUsers;
@@ -30,7 +29,7 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(tempArr));
   }
 
-  getLoggedInUserId(): number |undefined {
+  getLoggedInUserId(): number | undefined {
     return JSON.parse(localStorage.getItem('userId') ?? 'null');
   }
 
