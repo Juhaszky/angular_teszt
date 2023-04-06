@@ -4,24 +4,27 @@
     <ng-template mat-tab-label>
         <span (click)="findCryptoByName()">{{ crypto }}</span>
     </ng-template>
-    </mat-tab>
-    <mat-tab>
-        <ng-template mat-tab-label >
+</mat-tab>
+<mat-tab>
+    <ng-template mat-tab-label >
             <button mat-icon-button (click)="openDialog()">
                 <mat-icon>add_circle</mat-icon>
             </button>
         </ng-template>
     </mat-tab>
 </mat-tab-group>
-<div *ngIf="selectedCryptoDetails" 
-class="container">
-    <app-line-chart 
-    [cryptoInfo] = "selectedCryptoDetails"
-    ></app-line-chart>
-    <hr>
-<app-exchange
-[cryptoData] = "selectedCryptoDetails"
-></app-exchange>
-
-<button mat-raised-button color="warn" (click)="deleteCrypto();">DeleteCrypto</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-lg-2">
+            <app-high-low-list *ngIf="cryptos.length!==0" [cryptosArr]="cryptos"></app-high-low-list>
+        </div>
+        <div class="col-sm-6 col-lg-10">
+            <div *ngIf="selectedCryptoDetails" class="container-fluid box">
+                <app-line-chart [cryptoInfo] = "selectedCryptoDetails"></app-line-chart>
+                <hr>
+                <app-exchange [cryptoData] = "selectedCryptoDetails"></app-exchange>
+                <button mat-raised-button color="warn" (click)="deleteCrypto();">DeleteCrypto</button>
+            </div>
+        </div>
+    </div>
 </div>

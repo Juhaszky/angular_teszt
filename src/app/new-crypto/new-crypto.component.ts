@@ -31,9 +31,6 @@ export class NewCryptoComponent {
   }
 
   saveSelectedCrypto() {
-    if (this.selectedCrypto !== "") {
-      this.dialogRef.close({data: this.selectedCrypto});
-      //this.localStorage.saveUserData();
-    }
+    if (this.selectedCrypto !== "") this.dialogRef.close({data: this.selectedCrypto});
   }
 }
