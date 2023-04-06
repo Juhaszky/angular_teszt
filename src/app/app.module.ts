@@ -25,6 +25,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ExchangeComponent } from './exchange/exchange.component';
 import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
+import { HighLowListComponent } from './high-low-list/high-low-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
     NewCryptoComponent,
     LineChartComponent,
     ExchangeComponent,
+    HighLowListComponent,
   ],
   imports: [
     BrowserModule,
