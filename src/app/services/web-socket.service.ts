@@ -26,7 +26,7 @@ export class WebSocketService {
     }
   }
 
-  sendMessage(message: string) {
+  sendMessage(message: object) {
     this.socket$.next(message);
   }
 
