@@ -7,9 +7,6 @@ button {
 hr {
     color: black;
 }
-.box {
-    background-color: aliceblue;
-}
 
 .page {
     height: 100%;
@@ -17,11 +14,5 @@ hr {
 
 .dashboardP {
     height: 95%;
-    background-color: aliceblue;
-}
-.chartBox {
-    margin: auto auto;
-}
-.rightBox {
     background-color: aliceblue;
 }

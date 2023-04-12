@@ -28,13 +28,11 @@ export class WebSocketService {
 
         const symbol = data.symbol_id.split("_")[2];
         const existingIndex = this.receivedData.findIndex(d => d.symbol === symbol);
+        
         if (existingIndex >= 0) {
           this.deleteC.subscribe((x) => {
             if(x !== undefined) {
-              console.log(this.receivedData);
               this.receivedData.splice(existingIndex,1);
-              console.log("utána");
-              console.log(this.receivedData);
             }
           });
           this.receivedData[existingIndex] = {

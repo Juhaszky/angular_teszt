@@ -14,6 +14,8 @@ export class HighLowListComponent {
   @Input() cryptosArr: string[] = [];
   @Input() receivedRates:highLowObject[] = [];
   deleteC = new EventEmitter<void>();
+  interval = setInterval(() => this.receivedRates = this.webSocket.getData(),1000)
+
   constructor(public webSocket:WebSocketService) {
   }
   count: number = 0;
@@ -22,12 +24,11 @@ export class HighLowListComponent {
   ngOnInit() {
     this.runWebSocket();
   }
-  ngAfterViewInit() {
-    this.startCounter();
-  }
+
 
   ngOnDestroy() {
     this.webSocket.close();
+    clearInterval(this.interval);
   }
 
   runWebSocket() {
@@ -35,23 +36,6 @@ export class HighLowListComponent {
     this.cryptosArr.map((crypto)=> asset_ids.push(crypto+"/USD"));
     this.webSocket.connect();
     this.webSocket.sendMessage(asset_ids);
-    
   }
 
-  startCounter() {
-    setInterval(() => {
-      /*this.count++;
-      this.receivedRates = this.webSocket.receivedData;
-      if(this.count === 3) {
-        this.receivedRates = [];
-        this.receivedRates = this.webSocket.receivedData;
-        console.log(this.receivedRates);
-        this.receivedRates.find((c) => {
-        })
-        this.count = 0;
-      }*/
-      this.receivedRates = this.webSocket.getData();
-      console.log(this.webSocket.getData());
-    },1000)
-  }
 }

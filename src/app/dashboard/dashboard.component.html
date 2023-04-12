@@ -19,17 +19,17 @@
         <div class="col-sm-6 col-lg-2">
             <app-high-low-list *ngIf="cryptos.length!==0" [cryptosArr]="cryptos"></app-high-low-list>
         </div>
-        <div class="col-sm-6 col-lg-10 ">
-            <div *ngIf="selectedCryptoDetails" class="container-fluid rightBox">
-                <div class="row">
+        <div class="col-sm-6 col-lg-10">
+            <div *ngIf="selectedCryptoDetails" class="asd">
+                <div class="row container-fluid justify-content-center">
                     <app-line-chart [cryptoInfo] = "selectedCryptoDetails"></app-line-chart>
                     <hr>
                 </div>
-                <div class="row">
+                <div class="row container-fluid">
                     <app-exchange [cryptoData] = "selectedCryptoDetails"></app-exchange>
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <button mat-raised-button color="warn" (click)="deleteCrypto();">DeleteCrypto</button>
+                <div class="row justify-content-center">
+                    <button class="w-75" mat-raised-button color="warn" (click)="deleteCrypto();">DeleteCrypto</button>
                 </div>
             </div>
         </div>
