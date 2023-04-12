@@ -1,0 +1,22 @@
+* {
+    color:black;
+}
+.container {
+    
+}
+
+h1 {
+    border-bottom: 1px solid rgb(220, 211, 211);
+}
+h1,table {
+    text-align: center;
+}
+th {
+    font-size: 1.2em;
+}
+
+@media only screen and (min-width: 575px) {
+    .container {
+        border-right: 1px solid gray;
+    }
+  }

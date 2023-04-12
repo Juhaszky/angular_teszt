@@ -10,6 +10,18 @@ hr {
 .box {
     background-color: aliceblue;
 }
-.container-fluid{
-    padding: 1rem;
+
+.page {
+    height: 100%;
+}
+
+.dashboardP {
+    height: 95%;
+    background-color: aliceblue;
+}
+.chartBox {
+    margin: auto auto;
+}
+.rightBox {
+    background-color: aliceblue;
 }

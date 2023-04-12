@@ -31,7 +31,10 @@ export class WebSocketService {
         if (existingIndex >= 0) {
           this.deleteC.subscribe((x) => {
             if(x !== undefined) {
+              console.log(this.receivedData);
               this.receivedData.splice(existingIndex,1);
+              console.log("utána");
+              console.log(this.receivedData);
             }
           });
           this.receivedData[existingIndex] = {
@@ -50,10 +53,6 @@ export class WebSocketService {
     }
   }
 
-<<<<<<< Updated upstream
-  sendMessage(message: string) {
-    this.socket$.next(message);
-=======
   getData() {
     return this.receivedData;
   }
@@ -71,7 +70,6 @@ export class WebSocketService {
       "subscribe_filter_symbol_id": ["COINBASE"]
     };
     this.socket$.next(messageObj);
->>>>>>> Stashed changes
   }
 
   close() {

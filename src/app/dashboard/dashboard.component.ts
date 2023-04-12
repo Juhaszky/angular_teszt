@@ -22,8 +22,8 @@ export class DashboardComponent {
 
   openDialog() {
     this.dialog.open(NewCryptoComponent, {
-      height: '25%',
-      width: '25%'
+      height: '100vw',
+      width: '50vw'
     }).afterClosed().subscribe(res => {
       if (res?.data) {
         this.cryptoService.setUserCrypto(res.data);
