@@ -1,0 +1,15 @@
+<div *ngIf="cryptosArr" class="container h-100">
+    <h1>High-Low Listing</h1>
+    <table class="table table-striped">
+        <tr id="firstRow">
+            <th>Name</th>
+            <th><span style="color:green;">#</span>High</th>
+            <th><span  style="color:red;">#</span>Low</th>
+        </tr>
+        <tr *ngFor="let crypto of receivedRates">
+            <td>{{crypto.symbol}}</td>
+            <td>{{crypto.high}}</td>
+            <td>{{crypto.low}}</td>
+        </tr>
+    </table>
+</div>
